@@ -4,7 +4,7 @@
  */
 /*
  * @Author: Luqianyou 757628817@qq.com
- * @Description: 
+ * @Description:  
  */
 // axios封装
 import axios from 'axios'
@@ -19,11 +19,10 @@ const service = axios.create({
 })
 
 service.interceptors.response.use((res)=>{
-  console.log("🚀 ~ file: request.js ~ line 22 ~ service.interceptors.request.use ~ res", res)
   const {data,code,msg} = res.data
   if(code === 200){
     return data
-  }else if(code === 40001){
+  }else if(code === 500001){
     ElMessage.error(TOKEN_INVALID)
     setTimeout(()=>{
       router.push('/login')
@@ -52,7 +51,7 @@ function request(options){
   if(config.env === 'prod'){
     service.defaults.baseURL = config.baseApi
   }else{
-    service.defaults.baseURL = config.mock ? config.mockApi : config.baseApi
+    service.defaults.baseURL = isMock ? config.mockApi : config.baseApi
   }
  return service(options)
 }

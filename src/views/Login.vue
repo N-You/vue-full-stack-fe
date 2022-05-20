@@ -34,8 +34,8 @@ export default {
   data() {
     return {
       user: {
-        userName: "",
-        userPwd: "",
+        userName: "admin",
+        userPwd: "admin",
       },
       rules: {
         userName: [
@@ -60,7 +60,6 @@ export default {
       this.$refs.userForm.validate((valid) => {
         if (valid) {
           this.$api.login(this.user).then((res) => {
-            console.log(res);
             this.$router.push("/welcome");
           });
         } else {
